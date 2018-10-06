@@ -1,7 +1,13 @@
 from times import Time
 {.deadCodeElim: on.}
 {.push callconv: cdecl.}
-when defined(windows): 
+
+when defined(overrideLibclangName):
+  # Provide a way to let the user specify the library name from the outside
+  const
+    overrideLibclangName {.strdefine.} = ""
+    libclang* = overrideLibclangName
+elif defined(windows):
   const 
     libclang* = "libclang.dll"
 elif defined(macosx): 
@@ -10,6 +16,7 @@ elif defined(macosx):
 else: 
   const 
     libclang* = "libclang.so"
+
 type 
   CXErrorCode* {.pure, size: sizeof(cint).} = enum 
     Success = 0, Failure = 1, Crashed = 2, InvalidArguments = 3, 
