@@ -58,16 +58,16 @@ proc dispose*(a2: CXModuleMapDescriptor) {.cdecl,
 const 
   CINDEX_VERSION_MAJOR* = 0
   CINDEX_VERSION_MINOR* = 29
-template CINDEX_VERSION_ENCODE*(major, minor: expr): expr = 
+template CINDEX_VERSION_ENCODE*(major, minor: untyped): untyped = 
   (((major) * 10000) + ((minor) * 1))
 
 const 
   CINDEX_VERSION* = CINDEX_VERSION_ENCODE(CINDEX_VERSION_MAJOR, 
       CINDEX_VERSION_MINOR)
-template CINDEX_VERSION_STRINGIZE_IMPL(major, minor: expr): expr = 
+template CINDEX_VERSION_STRINGIZE_IMPL(major, minor: untyped): untyped = 
   $ major & "." & $ minor
 
-template CINDEX_VERSION_STRINGIZE*(major, minor: expr): expr = 
+template CINDEX_VERSION_STRINGIZE*(major, minor: untyped): untyped = 
   CINDEX_VERSION_STRINGIZE_IMPL(major, minor)
 
 const 
@@ -311,16 +311,16 @@ type
     ExternalASTSource_Membuffer_MMap = 10, Preprocessor = 11, 
     PreprocessingRecord = 12, SourceManager_DataStructures = 13, 
     Preprocessor_HeaderSearch = 14
-template MEMORY_IN_BYTES_BEGIN*(enumTyp: typedesc[CXTUResourceUsageKind]): expr = 
+template MEMORY_IN_BYTES_BEGIN*(enumTyp: typedesc[CXTUResourceUsageKind]): untyped = 
   CXTUResourceUsageKind.AST
 
-template MEMORY_IN_BYTES_END*(enumTyp: typedesc[CXTUResourceUsageKind]): expr = 
+template MEMORY_IN_BYTES_END*(enumTyp: typedesc[CXTUResourceUsageKind]): untyped = 
   CXTUResourceUsageKind.Preprocessor_HeaderSearch
 
-template First*(enumTyp: typedesc[CXTUResourceUsageKind]): expr = 
+template First*(enumTyp: typedesc[CXTUResourceUsageKind]): untyped = 
   CXTUResourceUsageKind.AST
 
-template Last*(enumTyp: typedesc[CXTUResourceUsageKind]): expr = 
+template Last*(enumTyp: typedesc[CXTUResourceUsageKind]): untyped = 
   CXTUResourceUsageKind.Preprocessor_HeaderSearch
 
 proc getTUResourceUsageName*(kind: CXTUResourceUsageKind): cstring {.cdecl, 
@@ -402,58 +402,58 @@ type
     CUDADeviceAttr = 413, CUDAGlobalAttr = 414, CUDAHostAttr = 415, 
     CUDASharedAttr = 416, PreprocessingDirective = 500, MacroDefinition = 501, 
     MacroExpansion = 502, InclusionDirective = 503, ModuleImportDecl = 600
-template LastRef*(enumTyp: typedesc[CXCursorKind]): expr = 
+template LastRef*(enumTyp: typedesc[CXCursorKind]): untyped = 
   CXCursorKind.VariableRef
 
-template AsmStmt*(enumTyp: typedesc[CXCursorKind]): expr = 
+template AsmStmt*(enumTyp: typedesc[CXCursorKind]): untyped = 
   CXCursorKind.GCCAsmStmt
 
-template LastStmt*(enumTyp: typedesc[CXCursorKind]): expr = 
+template LastStmt*(enumTyp: typedesc[CXCursorKind]): untyped = 
   CXCursorKind.OMPTeamsDirective
 
-template LastAttr*(enumTyp: typedesc[CXCursorKind]): expr = 
+template LastAttr*(enumTyp: typedesc[CXCursorKind]): untyped = 
   CXCursorKind.CUDASharedAttr
 
-template MacroInstantiation*(enumTyp: typedesc[CXCursorKind]): expr = 
+template MacroInstantiation*(enumTyp: typedesc[CXCursorKind]): untyped = 
   CXCursorKind.MacroExpansion
 
-template FirstDecl*(enumTyp: typedesc[CXCursorKind]): expr = 
+template FirstDecl*(enumTyp: typedesc[CXCursorKind]): untyped = 
   CXCursorKind.UnexposedDecl
 
-template LastDecl*(enumTyp: typedesc[CXCursorKind]): expr = 
+template LastDecl*(enumTyp: typedesc[CXCursorKind]): untyped = 
   CXCursorKind.CXXAccessSpecifier
 
-template LastPreprocessing*(enumTyp: typedesc[CXCursorKind]): expr = 
+template LastPreprocessing*(enumTyp: typedesc[CXCursorKind]): untyped = 
   CXCursorKind.InclusionDirective
 
-template FirstPreprocessing*(enumTyp: typedesc[CXCursorKind]): expr = 
+template FirstPreprocessing*(enumTyp: typedesc[CXCursorKind]): untyped = 
   CXCursorKind.PreprocessingDirective
 
-template LastInvalid*(enumTyp: typedesc[CXCursorKind]): expr = 
+template LastInvalid*(enumTyp: typedesc[CXCursorKind]): untyped = 
   CXCursorKind.InvalidCode
 
-template LastExtraDecl*(enumTyp: typedesc[CXCursorKind]): expr = 
+template LastExtraDecl*(enumTyp: typedesc[CXCursorKind]): untyped = 
   CXCursorKind.ModuleImportDecl
 
-template LastExpr*(enumTyp: typedesc[CXCursorKind]): expr = 
+template LastExpr*(enumTyp: typedesc[CXCursorKind]): untyped = 
   CXCursorKind.ObjCSelfExpr
 
-template FirstExtraDecl*(enumTyp: typedesc[CXCursorKind]): expr = 
+template FirstExtraDecl*(enumTyp: typedesc[CXCursorKind]): untyped = 
   CXCursorKind.ModuleImportDecl
 
-template ObjCSuperClassRef*(enumTyp: typedesc[CXCursorKind]): expr = 
+template ObjCSuperClassRef*(enumTyp: typedesc[CXCursorKind]): untyped = 
   CXCursorKind.FirstRef
 
-template InvalidFile*(enumTyp: typedesc[CXCursorKind]): expr = 
+template InvalidFile*(enumTyp: typedesc[CXCursorKind]): untyped = 
   CXCursorKind.FirstInvalid
 
-template UnexposedExpr*(enumTyp: typedesc[CXCursorKind]): expr = 
+template UnexposedExpr*(enumTyp: typedesc[CXCursorKind]): untyped = 
   CXCursorKind.FirstExpr
 
-template UnexposedStmt*(enumTyp: typedesc[CXCursorKind]): expr = 
+template UnexposedStmt*(enumTyp: typedesc[CXCursorKind]): untyped = 
   CXCursorKind.FirstStmt
 
-template UnexposedAttr*(enumTyp: typedesc[CXCursorKind]): expr = 
+template UnexposedAttr*(enumTyp: typedesc[CXCursorKind]): untyped = 
   CXCursorKind.FirstAttr
 
 type 
@@ -565,10 +565,10 @@ type
     ObjCObjectPointer = 109, FunctionNoProto = 110, FunctionProto = 111, 
     ConstantArray = 112, Vector = 113, IncompleteArray = 114, 
     VariableArray = 115, DependentSizedArray = 116, MemberPointer = 117
-template LastBuiltin*(enumTyp: typedesc[CXTypeKind]): expr = 
+template LastBuiltin*(enumTyp: typedesc[CXTypeKind]): untyped = 
   CXTypeKind.ObjCSel
 
-template FirstBuiltin*(enumTyp: typedesc[CXTypeKind]): expr = 
+template FirstBuiltin*(enumTyp: typedesc[CXTypeKind]): untyped = 
   CXTypeKind.Void
 
 type 

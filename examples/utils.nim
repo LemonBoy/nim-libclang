@@ -32,7 +32,7 @@ proc `[]=`*[T](p: CArray[T], k: cuint|int, val: T) =
     assert k.int < p.size
   p.mem[k] = val
   
-template withFile*(f, fn, mode: expr, actions: stmt): stmt {.immediate.} =
+template withFile*(f, fn, mode: untyped, actions: stmt): stmt {.immediate.} =
   var f: File
   if open(f, fn, mode):
     try:
