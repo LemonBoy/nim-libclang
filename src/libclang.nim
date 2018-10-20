@@ -571,7 +571,8 @@ type
     Record = 105, Enum = 106, Typedef = 107, ObjCInterface = 108, 
     ObjCObjectPointer = 109, FunctionNoProto = 110, FunctionProto = 111, 
     ConstantArray = 112, Vector = 113, IncompleteArray = 114, 
-    VariableArray = 115, DependentSizedArray = 116, MemberPointer = 117
+    VariableArray = 115, DependentSizedArray = 116, MemberPointer = 117,
+    Auto = 118, Elaborated = 119, Pipe = 120
 template LastBuiltin*(enumTyp: typedesc[CXTypeKind]): untyped = 
   CXTypeKind.ObjCSel
 
@@ -662,6 +663,8 @@ proc getArrayElementType*(T: CXType): CXType {.cdecl,
     importc: "clang_getArrayElementType", dynlib: libclang.}
 proc getArraySize*(T: CXType): clonglong {.cdecl, importc: "clang_getArraySize", 
     dynlib: libclang.}
+proc getNamedType*(T: CXType): CXType {.cdecl,
+    importc: "clang_Type_getNamedType", dynlib: libclang.}
 type 
   CXTypeLayoutError* {.pure, size: sizeof(cint).} = enum 
     InvalidFieldName = - 5, NotConstantSize = - 4, Dependent = - 3, 
